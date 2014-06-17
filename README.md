@@ -22,5 +22,6 @@ $ ln -s dotfiles/zsh_files/.zshrc         .zshrc
 $ ln -s dotfiles/vim_files                .vim
 $ ln -s dotfiles/vim_files/.vimrc         .vimrc
 $ ln -s dotfiles/tmux_files/.tmux.conf    .tmux.conf
+$ ln -s dotfiles/tmux_files/.teamocil     .teamocil
 $ ln -s dotfiles/git_files/.gitconfig     .gitconfig # make sure you update the git username and email to yours!
 ````
