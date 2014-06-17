@@ -1,0 +1,15 @@
+session:
+  name: "Rick"
+  windows:
+    - name: server
+      layout: even-vertical
+      filters:
+        before: "rick"
+      panes:
+        - cmd: "clear; jekyll serve -w"
+    - name: vim
+      layout: even-vertical
+      filters:
+        before: "rick"
+      panes:
+        - cmd: "clear; vim"

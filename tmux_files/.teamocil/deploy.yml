@@ -1,0 +1,10 @@
+session:
+  name: "Deploy"
+  windows:
+    - name: app server command station
+      layout: tiled
+      splits:
+      - cmd: ssh lb1
+      - cmd: ssh app2
+      - cmd: ssh app3
+      - cmd: ssh app4

@@ -1,0 +1,32 @@
+[user]
+  name = Rick Winfrey
+  email = rick.winfrey@gmail.com
+
+[core]
+  editor = /usr/bin/vim
+  excludesfile = ~/.gitignore
+
+[color]
+  ui = true
+
+[color "diff"]
+  whitespace = red reverse
+
+[alias]
+  diff = diff --patience --ignore-space-change
+  show = show --patience --ignore-space-change
+  co = checkout
+  st = status
+  br = branch
+  shas = log --pretty=format:\"%H\"
+  hist = log --pretty=format:\"%Cgreen%h%Creset %Cblue%ad%Creset %s%C(yellow)%d%Creset %Cblue[%an]%Creset\" --graph --date=short
+  type = cat-file -t
+  dump = cat-file -p
+  praise = blame
+  count = git shortlog -sn
+
+[push]
+  default = upstream
+
+[hub]
+  protocol = https
