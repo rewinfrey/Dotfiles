@@ -1,9 +1,12 @@
 export PATH=/bin:$HOME/bin:/usr/local:/usr/local/mysql/bin:$PATH
 export PATH=$HOME/local/bin:/usr/local/bin:/usr/local/sbin:$HOME/Library/Haskell/opt/local/bin:/opt/local/sbin:/Users/rickwinfrey/.local/bin:$PATH
 export PATH=$HOME/riak-1.2.1/rel/riak/bin:$PATH
-source /usr/local/opt/chruby/share/chruby/chruby.sh
+#source /usr/local/opt/chruby/share/chruby/chruby.sh
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 #ALIASES
+  # vim
+    alias vim="/usr/local/Cellar/vim/7.4.273/bin/vim"
+
   # clojure
     alias cljr="cd ~/code/clojure"
 
@@ -24,11 +27,11 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
     alias app="cd ~/code/hireology/app; l"
     alias dotfiles="cd ~/dotfiles ; l"
     alias rick="cd ~/code/rick ; l"
+    alias htdocs="cd /Applications/MAMP/htdocs ; l"
 
   # rbenv
     alias local="rbenv local"
     alias global="rbenv global"
-    alias shell="rbenv shell"
     alias rubies="rbenv versions"
 
   # git
@@ -74,6 +77,12 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
   # Rails
     alias rs="rails server"
     alias rc="rails console"
+    alias test="export RAILS_ENV=test"
+    alias dev="export RAILS_ENV=development"
+    alias prod="export RAILS_ENV=production"
+
+  # Tmate
+    alias tmate="TERM=xterm-256color tmate"
 
   # generic
     alias c="clear"
@@ -102,6 +111,9 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
   # ctags
     alias ctags="ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)"
+
+  # utilities
+    alias au="ruby ~/code/ruby/utilities/lib/ack_unique.rb"
 
   # take you to the dir of a file in a gem. e.g. `2gem rspec`
     2gem () {
@@ -152,3 +164,6 @@ export PATH
 if [ -f ~/.brew_completion.sh ]; then
     . ~/.brew_completion.sh
 fi
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"

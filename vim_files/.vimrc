@@ -25,6 +25,8 @@ set shiftwidth=2                   " number of spaces used by autoindenting
 set autoindent                     " default autoindent to on
 set copyindent                     " copy previous indentation on autoindenting
 set shiftround                     " use multiple of shiftwidth when indenting with '<' and '>'
+set cc=90
+set winwidth=100
 
 " display
 set encoding=utf-8                 " sets default encoding type to UTF-8
@@ -92,6 +94,20 @@ map <silent> <LocalLeader>nf :NERDTreeFind<CR>
 let g:NERDTreeWinSize = 40
 let NERDTreeShowHidden=1
 
+" tabs
+set tabline=%!tabber#TabLine()
+map <silent> <LocalLeader>ts :tab split<CR>
+map <silent> <LocalLeader>tn :TabberLabel<CR>
+map <silent> <LocalLeader>tl :TabberShiftLeft<CR>
+map <silent> <LocalLeader>tr :TabberShiftRight<CR>
+map <silent> <LocalLeader>1  :tabnext 1<CR>
+map <silent> <LocalLeader>2  :tabnext 2<CR>
+map <silent> <LocalLeader>3  :tabnext 3<CR>
+map <silent> <LocalLeader>4  :tabnext 4<CR>
+map <silent> <LocalLeader>5  :tabnext 5<CR>
+map <silent> <LocalLeader>6  :tabnext 6<CR>
+map <silent> <LocalLeader>7  :tabnext 7<CR>
+
 " regenerates ctags
 map <silent> <LocalLeader>ct :!ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths) <CR>
 
@@ -117,11 +133,42 @@ nnoremap <leader>i :set list!<CR>
 nmap <LocalLeader>y orequire "pry"<CR>binding.pry<ESC>;
 
 " Airline
-let g:airline_powerline_fonts = 1
+""""""""""""""""""""""""""""""
+let g:airline_theme               = 'solarized'
+let g:airline_enable_branch       = 1
+let g:airline_enable_syntastic    = 1
+let g:airline_detect_modification = 1
+let g:airline_detect_paste        = 1
+let g:airline_detect_iminsert     = 1
+let g:airline_powerline_fonts     = 1
+let g:airline#extensions#ctrlp#color_template = 'replace'
+let g:airline#extensions#ctrlp#show_adjacent_modes = 1
+let g:airline#extensions#whitespace#enabled = 1
+let g:airline#extensions#whitespace#symbol = '!'
+let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing' ]
+let g:airline#extensions#whitespace#show_message = 1
+let g:airline#extensions#whitespace#trailing_format = 'trailing[%s]'
+let g:airline#extensions#whitespace#mixed_indent_format = 'mixed-indent[%s]'
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
+"let g:airline_left_sep          = '🐰 '
+"  let g:airline_left_sep = '»'
+"  let g:airline_left_sep = '▶'
+"  let g:airline_right_sep = '«'
+"  let g:airline_right_sep = '◀'
+"  let g:airline_symbols.linenr = '␊'
+"  let g:airline_symbols.linenr = '␤'
+"  let g:airline_symbols.linenr = '¶'
+"  let g:airline_symbols.branch = '⎇'
+"  let g:airline_symbols.paste = 'ρ'
+"  let g:airline_symbols.paste = 'Þ'
+"  let g:airline_symbols.paste = '∥'
+"  let g:airline_symbols.whitespace = 'Ξ'
+"let g:airline_left_sep = '▶'
+"let g:airline_powerline_fonts = 1
+"let g:airline#extensions#tabline#enabled = 1
 
 if ! has('gui_running')
     set ttimeoutlen=10
@@ -131,21 +178,6 @@ if ! has('gui_running')
         au InsertLeave * set timeoutlen=1000
     augroup END
 endif
-
-let g:airline_symbols.space = "\ua0"
-" Powerline, toolbar (https://github.com/Lokaltog/vim-powerline/)
-" let g:Powerline_symbols = 'fancy'
-" let g:Powerline_symbols = 'compatible'
-" let g:Powerline_stl_path_style = 'relative'
-" set laststatus=2   " Always show the statusline
-
-" got this list from here: https://github.com/Lokaltog/vim-powerline/blob/c4b72c5be57b165bb6a89d0b8a974fe62c0091d0/autoload/Powerline/Themes/default.vim
-" call Pl#Theme#RemoveSegment('fugitive:branch')
-" call Pl#Theme#RemoveSegment('syntastic:errors')
-" call Pl#Theme#RemoveSegment('fileformat')
-" call Pl#Theme#RemoveSegment('fileencoding')
-" call Pl#Theme#RemoveSegment('filetype')
-" call Pl#Theme#RemoveSegment('lineinfo')
 
 " easier navigation between split windows
 nnoremap <c-j> <c-w>j
@@ -217,7 +249,8 @@ endif
 
 " colorscheme
 set t_Co=256
-set background=light
+" set background=light
+set background=dark
 let g:solarized_visibility = "high"
 let g:airline_powerline_fonts=1
 let g:airline_theme="solarized"
