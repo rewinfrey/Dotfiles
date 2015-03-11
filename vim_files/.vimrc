@@ -12,6 +12,12 @@ syntax enable
 set rtp+=/usr/local/go/misc/vim
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
+" rainbow parenthesis
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
 " edits behavior
 set showmode                       " always show the current Vim mode
 set hidden                         " hides buffers rather than closing them
@@ -236,6 +242,12 @@ nnoremap L $
 inoremap <leader>w <esc>:write<CR>:!./run_tests.rb %<CR>
 nnoremap <leader>w :!./run_tests.rb<CR>
 
+" run clojure tests
+nnoremap <leader>t :RunTests<CR>
+
+" connect to repl
+nnoremap <leader>c :Connect<CR>
+
 autocmd FileType clojure setlocal lispwords+=describe,it,context
 
 " make racket files appear as scheme
@@ -249,7 +261,7 @@ endif
 
 " colorscheme
 set t_Co=256
-" set background=light
+" set background=dark
 set background=dark
 let g:solarized_visibility = "high"
 let g:airline_powerline_fonts=1

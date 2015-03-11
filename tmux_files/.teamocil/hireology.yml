@@ -1,27 +1,18 @@
-session:
-  name: "pair"
-  windows:
-    - name: server
-      layout: even-vertical
-      filters:
-        before: "app"
-      panes:
-        - cmd: "clear; be rails server --binding 127.0.0.1"
-    - name: console
-      layout: even-vertical
-      filters:
-        before: "app"
-      panes:
-        - cmd: "clear; be rails console"
-    - name: vim
-      layout: even-vertical
-      filters:
-        before: "app"
-      panes:
-        - cmd: "clear; vim"
-    - name: spec
-      layout: even-vertical
-      filters:
-        before: "app"
-      panes:
-        - cmd: "clear; rt; be rspec spec_no_rails spec; be cucumber"
+name: "hireology"
+windows:
+  - name: server
+    layout: even-vertical
+    panes:
+      - commands: [ app, clear, be rails server --binding 127.0.0.1 ]
+  - name: console
+    layout: even-vertical
+    panes:
+      - commands: [ app, clear, be rails console ]
+  - name: vim
+    layout: even-vertical
+    panes:
+      - commands: [ app, clear, vim ]
+  - name: spec
+    layout: even-vertical
+    panes:
+      - commands: [ app, clear, RAILS_ENV=test be make build-db, rspec spec_no_rails spec, be cucumber ]

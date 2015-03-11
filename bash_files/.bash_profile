@@ -1,4 +1,4 @@
-export PATH=/bin:$HOME/bin:/usr/local:/usr/local/mysql/bin:$PATH
+export PATH=/usr/local/bin:/bin:$HOME/bin:/usr/local:/usr/local/mysql/bin:$PATH
 export PATH=$HOME/local/bin:/usr/local/bin:/usr/local/sbin:$HOME/Library/Haskell/opt/local/bin:/opt/local/sbin:/Users/rickwinfrey/.local/bin:$PATH
 export PATH=$HOME/riak-1.2.1/rel/riak/bin:$PATH
 #source /usr/local/opt/chruby/share/chruby/chruby.sh
@@ -25,9 +25,12 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
     alias code="cd ~/code ; l"
     alias hire="cd ~/code/hireology; l"
     alias app="cd ~/code/hireology/app; l"
+    alias da="cd ~/code/hireology/data-analytics; l"
     alias dotfiles="cd ~/dotfiles ; l"
     alias rick="cd ~/code/rick ; l"
+    alias blog="cd ~/code/blog ; l"
     alias htdocs="cd /Applications/MAMP/htdocs ; l"
+    alias fletching="cd ~/code/ruby/fletching; l"
 
   # rbenv
     alias local="rbenv local"
@@ -96,6 +99,10 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
   # editors
     alias vim="vim -cNERDTree"
     alias m="open -a TextMate.app *"
+
+  # ci server
+    alias ci="ssh -L 8080:localhost:8080 build0"
+    alias jenkins=ci
 
   # heroku
     alias hp="heroku run console pry"

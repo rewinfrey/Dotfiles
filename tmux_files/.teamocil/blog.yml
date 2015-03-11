@@ -1,0 +1,16 @@
+session:
+  name: "Blog"
+  windows:
+    - name: server
+      layout: even-vertical
+      filters:
+        before: "blog"
+      panes:
+        - cmd: "clear; jekyll serve -w"
+    - name: vim
+      layout: even-vertical
+      filters:
+        before: "blog"
+      panes:
+        - cmd: "clear; vim"
+

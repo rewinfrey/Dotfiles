@@ -1,0 +1,10 @@
+name: "Fletching"
+windows:
+  - name: server
+    layout: even-vertical
+    panes:
+      - commands: [ clear, be rails server ]
+  - name: vim
+    layout: even-vertical
+    panes:
+      - commands: [ clear, vim ]
