@@ -4,6 +4,7 @@ Clone this dotfiles repository, and symlink the various components you wish to u
 
 ````
 $ cd
+$ ln -s dotfiles/emacs_files/             .emacs.d
 $ ln -s dotfiles/bash_files/.bash_profile .bash_profile
 $ ln -s dotfiles/zsh_files/.zshrc         .zshrc
 $ ln -s dotfiles/vim_files                .vim
