@@ -1,8 +1,14 @@
 export PATH=/usr/local/bin:/bin:$HOME/bin:/usr/local:/usr/local/mysql/bin:$PATH
 export PATH=$HOME/local/bin:/usr/local/bin:/usr/local/sbin:$HOME/Library/Haskell/opt/local/bin:/opt/local/sbin:/Users/rickwinfrey/.local/bin:$PATH
 export PATH=$HOME/riak-1.2.1/rel/riak/bin:$PATH
+export PATH=$HOME/code/purescript:$PATH
+export JAVA_HOME=$(/usr/libexec/java_home) # for maven...
 #source /usr/local/opt/chruby/share/chruby/chruby.sh
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
+[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+
 #ALIASES
   # vim
     alias vim="/usr/local/Cellar/vim/7.4.273/bin/vim"
@@ -48,26 +54,8 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
     alias gh="  git hist"
     alias gl="  git log --pretty=format:\"%Cgreen%h%Creset %Cblue%ad%Creset %s%C(yellow)%d%Creset %Cblue[%an]%Creset\" --graph --date=short --branches"
 
-  # rvm
-    #alias rrbx="    rvm use \$(rvm list strings | grep -i rbx        | tail -1)"
-    #alias rmac="    rvm use \$(rvm list strings | grep -i macruby    | tail -1)"
-    #alias rjav="    rvm use \$(rvm list strings | grep -i jruby      | tail -1)"
-    #alias r186="    rvm use \$(rvm list strings | grep -i 1.8.6      | tail -1)"
-    #alias r187="    rvm use \$(rvm list strings | grep -i 1.8.7      | tail -1)"
-    #alias r191="    rvm use \$(rvm list strings | grep -i 1.9.1      | tail -1)"
-    #alias r192180=" rvm use \$(rvm list strings | grep -i 1.9.2-p180 | tail -1)"
-    #alias r192="    rvm use \$(rvm list strings | grep -i 1.9.2      | tail -1)"
-    #alias r193="    rvm use \$(rvm list strings | grep -i 1.9.3      | tail -1)"
-    #alias r2="      rvm use \$(rvm list strings | grep -i 2.0        | tail -1)"
-
   # Hireology
     alias fetch_db="code; cd shell; ./pull_db_from_qa.sh; ./restore_db.sh"
-
-  # WSU Server aliases
-    #alias kira="ssh rewinfre@kira.cs.wichita.edu"
-    #alias scotty="ssh rewinfre@scotty.cs.wichita.edu"
-    #alias spock="ssh rewinfre@spock.cs.wichita.edu"
-    #alias kirk="ssh rewinfre@kirk.cs.wichita.edu"
 
   # homebrew
     alias brew-formulas="open 'https://github.com/mxcl/homebrew/tree/master/Library/Formula'"
@@ -89,6 +77,7 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
   # generic
     alias c="clear"
+    alias done="say done"
     #alias ss="python -m SimpleHTTPServer" # simple server (serves current dir on port 8000)
 
   # instaweb
@@ -104,6 +93,12 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
     alias ci="ssh -L 8080:localhost:8080 build0"
     alias jenkins=ci
 
+  # data warehouse qa
+    alias dw_qa="ssh -L 8080:localhost:8080 da2"
+
+  # data warehouse production
+    alias dw_prod="ssh -L 8080:localhost:8080 db2"
+
   # heroku
     alias hp="heroku run console pry"
     alias hl="heroku logs"
@@ -117,6 +112,7 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
     alias s="source ~/.bash_profile"
 
   # ctags
+    alias ctags_clojure="ctags -R --languages=clojure --exclude=.git --exclude=log . "
     alias ctags="ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)"
 
   # utilities
@@ -158,7 +154,7 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
   #PS1="\[\033[90;47m\] \@ \[\033[0m\] \[\033[90;47m\] \w \[\033[0m\] \[\033[90;47m\] $(~/.rvm/bin/rvm-prompt) \[\033[0m\] \[\033[90;47m\]\$(parse_git_branch)\[\033[0m\]\n\$ \[\033[0m\]"
 
   # gray-scalar prompt
-  PS1="\[\033[7;38;47m\] \w \[\033[0m\] \[\033[8;37;40m\]\$(parse_git_branch)\[\033[0m\]\n🐰  "
+  PS1="\[\033[9;36;40m\] \w \[\033[0m\] \[\033[9;36;40m\]\$(parse_git_branch)\[\033[0m\]\n🐰  "
 
 
 # Setting PATH for JRuby 1.7.2
