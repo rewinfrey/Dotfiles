@@ -9,6 +9,9 @@ syntax enable
 set rtp+=/usr/local/go/misc/vim
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
+" disable Ex mode
+nnoremap Q <nop>
+
 " edits behavior
 set showmode                       " always show the current Vim mode
 set hidden                         " hides buffers rather than closing them
@@ -138,6 +141,9 @@ nmap <silent> <LocalLeader>p :CtrlP<CR>
 let g:ctrlp_switch_buffer = 'Et'
 let g:ctrlp_open_new_file = 'v'
 nnoremap <localleader>. :CtrlPTag<cr>
+
+" Copy to clipboard
+nnoremap <localleader>y :w !pbcopy<CR><CR>
 
 " Clojure
 " rainbow parenthesis

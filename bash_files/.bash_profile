@@ -2,7 +2,18 @@ export PATH=/usr/local/bin:/bin:$HOME/bin:/usr/local:/usr/local/mysql/bin:$PATH
 export PATH=$HOME/local/bin:/usr/local/bin:/usr/local/sbin:$HOME/Library/Haskell/opt/local/bin:/opt/local/sbin:/Users/rickwinfrey/.local/bin:$PATH
 export PATH=$HOME/riak-1.2.1/rel/riak/bin:$PATH
 export PATH=$HOME/code/purescript:$PATH
+export PATH="/usr/local/heroku/bin:$PATH"
+# Setting PATH for JRuby 1.7.2
+# The orginal version is saved in .bash_profile.jrubysave
+export PATH="${PATH}:/Library/Frameworks/JRuby.framework/Versions/Current/bin"
 export JAVA_HOME=$(/usr/libexec/java_home) # for maven...
+
+# Brew completion
+if [ -f ~/.brew_completion.sh ]; then
+  . ~/.brew_completion.sh
+fi
+
+### Added by the Heroku Toolbelt
 #source /usr/local/opt/chruby/share/chruby/chruby.sh
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
@@ -15,6 +26,8 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
 
   # clojure
     alias cljr="cd ~/code/clojure"
+    alias dev="ENV=development lein with-profile development"
+    alias spec="ENV=spec lein with-profile spec"
 
   # tmux
     alias tmux="TERM=screen-256color-bce tmux"
@@ -29,14 +42,16 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
     alias ...="cd ../.. ; l"
     alias ....="cd ../../.. ; l"
     alias code="cd ~/code ; l"
-    alias hire="cd ~/code/hireology; l"
+    alias hireology="cd ~/code/hireology; l"
     alias app="cd ~/code/hireology/app; l"
     alias da="cd ~/code/hireology/data-analytics; l"
+    alias diagrams="cd ~/code/hireology/diagrams; l"
     alias dotfiles="cd ~/dotfiles ; l"
     alias rick="cd ~/code/rick ; l"
     alias blog="cd ~/code/blog ; l"
     alias htdocs="cd /Applications/MAMP/htdocs ; l"
     alias fletching="cd ~/code/ruby/fletching; l"
+    alias grad="cd ~/grad; l"
 
   # rbenv
     alias local="rbenv local"
@@ -145,28 +160,20 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
   # At some point it might become necessary to rewrite this in C, but for now this will do
     alias chomp="ruby -e 'print \$stdin.read.chomp'"
 
-# PROMPT
+  # PROMPT
   function parse_git_branch {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \1 /'
   }
 
-  # multi-colored prompt
-  #PS1="\[\033[90;47m\] \@ \[\033[0m\] \[\033[90;47m\] \w \[\033[0m\] \[\033[90;47m\] $(~/.rvm/bin/rvm-prompt) \[\033[0m\] \[\033[90;47m\]\$(parse_git_branch)\[\033[0m\]\n\$ \[\033[0m\]"
+  function git_prompt {
+   current_git_branch=$(parse_git_branch)
+   if [$current_git_branch -eq ""]; then
+     echo  $(parse_git_branch)
+   fi
+  }
 
   # gray-scalar prompt
-  PS1="\[\033[9;36;40m\] \w \[\033[0m\] \[\033[9;36;40m\]\$(parse_git_branch)\[\033[0m\]\n🐰  "
+  PS1="\[\033[9;36;40m\] \w \[\033[0m\] \[\033[9;36;40m\]\$(parse_git_branch)\[\033[0m\]\n🐰  "
 
-
-# Setting PATH for JRuby 1.7.2
-# The orginal version is saved in .bash_profile.jrubysave
-PATH="${PATH}:/Library/Frameworks/JRuby.framework/Versions/Current/bin"
-export PATH
-#source /Users/bashrw/.rvm/scripts/rvm
-
-# Brew completion
-if [ -f ~/.brew_completion.sh ]; then
-    . ~/.brew_completion.sh
-fi
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+# added by Anaconda 2.3.0 installer
+export PATH="/Users/bashrw/anaconda/bin:$PATH"

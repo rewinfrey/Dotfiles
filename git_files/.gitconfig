@@ -24,9 +24,13 @@
   dump = cat-file -p
   praise = blame
   count = git shortlog -sn
+	unstage = reset HEAD --
+	last = log -1 HEAD
 
 [push]
   default = upstream
 
 [hub]
   protocol = https
+[rerere]
+	enabled = true
