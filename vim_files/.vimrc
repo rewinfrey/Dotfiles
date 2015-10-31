@@ -67,6 +67,11 @@ if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 
+" cursorLine
+set cursorline
+hi cursorline cterm=none ctermbg=none ctermfg=none
+hi cursorlinenr ctermfg=yellow
+
 " command history / undo
 set history=1000                   " because where do we know where we are going, if we do not know where we have been?
 set undolevels=1000                " undo a friday night of drunken coding

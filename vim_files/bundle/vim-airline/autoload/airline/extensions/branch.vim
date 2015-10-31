@@ -1,4 +1,4 @@
-" MIT License. Copyright (c) 2013-2014 Bailey Ling.
+" MIT License. Copyright (c) 2013-2015 Bailey Ling.
 " vim: et ts=2 sts=2 sw=2
 
 let s:has_fugitive = exists('*fugitive#head')
@@ -7,6 +7,21 @@ let s:has_vcscommand = get(g:, 'airline#extensions#branch#use_vcscommand', 0) &&
 
 if !s:has_fugitive && !s:has_lawrencium && !s:has_vcscommand
   finish
+endif
+
+let s:head_format = get(g:, 'airline#extensions#branch#format', 0)
+if s:head_format == 1
+  function! s:format_name(name)
+    return fnamemodify(a:name, ':t')
+  endfunction
+elseif type(s:head_format) == type('')
+  function! s:format_name(name)
+    return call(s:head_format, [a:name])
+  endfunction
+else
+  function! s:format_name(name)
+    return a:name
+  endfunction
 endif
 
 let s:git_dirs = {}
@@ -21,7 +36,12 @@ function! s:get_git_branch(path)
   else
     try
       let line = join(readfile(dir . '/HEAD'))
-      let name = strpart(line, 16)
+      if strpart(line, 0, 16) == 'ref: refs/heads/'
+        let name = strpart(line, 16)
+      else
+        " raw commit hash
+        let name = strpart(line, 0, 7)
+      endif
     catch
       let name = ''
     endtry
@@ -37,9 +57,11 @@ function! airline#extensions#branch#head()
   endif
 
   let b:airline_head = ''
+  let found_fugitive_head = 0
 
   if s:has_fugitive && !exists('b:mercurial_dir')
-    let b:airline_head = fugitive#head()
+    let b:airline_head = fugitive#head(7)
+    let found_fugitive_head = 1
 
     if empty(b:airline_head) && !exists('b:git_dir')
       let b:airline_head = s:get_git_branch(expand("%:p:h"))
@@ -61,8 +83,17 @@ function! airline#extensions#branch#head()
     endif
   endif
 
-  if empty(b:airline_head) || !s:check_in_path()
+  if empty(b:airline_head) || !found_fugitive_head && !s:check_in_path()
     let b:airline_head = ''
+  endif
+
+  let b:airline_head = s:format_name(b:airline_head)
+
+  if exists("g:airline#extensions#branch#displayed_head_limit")
+    let w:displayed_head_limit = g:airline#extensions#branch#displayed_head_limit
+    if len(b:airline_head) > w:displayed_head_limit - 1
+      let b:airline_head = b:airline_head[0:w:displayed_head_limit - 1].'…'
+    endif
   endif
 
   return b:airline_head
@@ -93,6 +124,7 @@ function! s:check_in_path()
         if match(root, pattern) >= 0
           let root = substitute(root, pattern, '', '')
         endif
+      endif
     endif
 
     let b:airline_file_in_root = stridx(bufferpath, root) > -1
