@@ -99,6 +99,9 @@ set nowritebackup
 
 let maplocalleader=","
 
+" coffeescript
+autocmd FileType litcoffee runtime ftplugin/coffee.vim
+
 " :command NT NERDTree
 map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
 map <silent> <LocalLeader>nr :NERDTree<CR>

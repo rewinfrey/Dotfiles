@@ -1,21 +1,15 @@
 export PATH=/usr/local/bin:/bin:$HOME/bin:/usr/local:/usr/local/mysql/bin:$PATH
 export PATH=$HOME/local/bin:/usr/local/bin:/usr/local/sbin:$HOME/Library/Haskell/opt/local/bin:/opt/local/sbin:/Users/rickwinfrey/.local/bin:$PATH
-export PATH=$HOME/riak-1.2.1/rel/riak/bin:$PATH
-export PATH=$HOME/code/purescript:$PATH
+export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="/usr/local/heroku/bin:$PATH"
-# Setting PATH for JRuby 1.7.2
-# The orginal version is saved in .bash_profile.jrubysave
-export PATH="${PATH}:/Library/Frameworks/JRuby.framework/Versions/Current/bin"
 export JAVA_HOME=$(/usr/libexec/java_home) # for maven...
 
-# Brew completion
-if [ -f ~/.brew_completion.sh ]; then
-  . ~/.brew_completion.sh
-fi
+eval "$(rbenv init -)"
 
-### Added by the Heroku Toolbelt
-#source /usr/local/opt/chruby/share/chruby/chruby.sh
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+# Brew completion
+#if [ -f ~/.brew_completion.sh ]; then
+#  . ~/.brew_completion.sh
+#fi
 
 BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
@@ -42,15 +36,12 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
     alias ...="cd ../.. ; l"
     alias ....="cd ../../.. ; l"
     alias code="cd ~/code ; l"
-    alias hireology="cd ~/code/hireology; l"
-    alias app="cd ~/code/hireology/app; l"
-    alias da="cd ~/code/hireology/data-analytics; l"
-    alias diagrams="cd ~/code/hireology/diagrams; l"
     alias dotfiles="cd ~/dotfiles ; l"
     alias rick="cd ~/code/rick ; l"
     alias blog="cd ~/code/blog ; l"
     alias htdocs="cd /Applications/MAMP/htdocs ; l"
     alias fletching="cd ~/code/ruby/fletching; l"
+    alias action_logic="cd ~/code/ruby/action_logic; l"
     alias grad="cd ~/grad; l"
 
   # rbenv
@@ -128,7 +119,10 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
 
   # ctags
     alias ctags_clojure="ctags -R --languages=clojure --exclude=.git --exclude=log . "
-    alias ctags="ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)"
+    #alias ctags_ruby="ctags -R --languages=ruby --exclude=.git --exclude=log . \$\(bundle list --paths\)"
+    function ctags_ruby {
+      ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)
+    }
 
   # utilities
     alias au="ruby ~/code/ruby/utilities/lib/ack_unique.rb"
