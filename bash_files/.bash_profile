@@ -43,6 +43,7 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
     alias fletching="cd ~/code/ruby/fletching; l"
     alias action_logic="cd ~/code/ruby/action_logic; l"
     alias grad="cd ~/grad; l"
+    alias github="cd ~/github/github"
 
   # rbenv
     alias local="rbenv local"
