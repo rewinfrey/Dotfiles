@@ -1,6 +1,6 @@
 [user]
   name = Rick Winfrey
-  email = rick.winfrey@gmail.com
+  email = rewinfrey@github.com
 
 [core]
   editor = /usr/bin/vim
@@ -34,3 +34,9 @@
   protocol = https
 [rerere]
 	enabled = true
+[credential]
+	helper = osxkeychain
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
