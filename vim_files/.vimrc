@@ -150,6 +150,11 @@ let g:ctrlp_switch_buffer = 'Et'
 let g:ctrlp_open_new_file = 'v'
 nnoremap <localleader>. :CtrlPTag<cr>
 
+" Make CtrlP work nicely with large repos
+let g:ctrlp_max_files=0
+let g:ctrlp_max_depth=40
+
+
 " Copy to clipboard
 nnoremap <localleader>y :w !pbcopy<CR><CR>
 
