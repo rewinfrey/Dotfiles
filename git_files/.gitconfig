@@ -3,7 +3,7 @@
   email = rewinfrey@github.com
 
 [core]
-  editor = /usr/bin/vim
+  editor = /usr/local/bin/vim
   excludesfile = ~/.gitignore
 
 [color]
