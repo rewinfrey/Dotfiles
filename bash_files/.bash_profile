@@ -44,6 +44,7 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
     alias action_logic="cd ~/code/ruby/action_logic; l"
     alias grad="cd ~/grad; l"
     alias github="cd ~/github/github"
+    alias meditation="cd ~/code/meditation; vim ~/code/meditation/log.txt"
 
   # rbenv
     alias local="rbenv local"
