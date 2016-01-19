@@ -152,13 +152,13 @@ nnoremap <localleader>. :CtrlPTag<cr>
 
 " Make CtrlP work nicely with large repos
 let g:ctrlp_max_files=0
-let g:ctrlp_max_depth=40
+let g:ctrlp_max_depth=30
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:30,results:30'
 let g:ctrlp_custom_ignore = {
-  \ 'dir': '\v[\/](node_modules|tags)',
+  \ 'dir': '\v[\/](node_modules|tags|vendor|public|tmp|git-bin|enterprise|bin)',
   \ 'file': '\vtags',
   \ }
-
+let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
 
 " Copy to clipboard
 nnoremap <localleader>y :w !pbcopy<CR><CR>
