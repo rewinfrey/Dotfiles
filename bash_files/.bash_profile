@@ -41,10 +41,13 @@ BASE16_SHELL="$HOME/dotfiles/base16-shell/base16-default.dark.sh"
     alias blog="cd ~/code/blog ; l"
     alias htdocs="cd /Applications/MAMP/htdocs ; l"
     alias fletching="cd ~/code/ruby/fletching; l"
-    alias action_logic="cd ~/code/ruby/action_logic; l"
+    alias action_logic="cd ~/code/ruby/ActionLogic; l"
+    alias al="cd ~/code/ruby/ActionLogic; l"
     alias grad="cd ~/grad; l"
-    alias github="cd ~/github/github"
+    alias github="cd ~/github; l"
+    alias dotcom="cd ~/github/github"
     alias meditation="cd ~/code/meditation; vim ~/code/meditation/log.txt"
+    alias om="cd ~/code/rails/open-mentor; l"
 
   # rbenv
     alias local="rbenv local"
@@ -113,8 +116,9 @@ BASE16_SHELL="$HOME/dotfiles/base16-shell/base16-default.dark.sh"
     alias ph="git add .; git commit -m 'apples and arrows'; git push heroku master"
 
   # postgresql
-    alias pg_start="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
-    alias pg_stop="pg_ctl -D /usr/local/var/postgres stop -s -m fast"
+    #alias pg_start="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
+    #alias pg_stop="pg_ctl -D /usr/local/var/postgres stop -s -m fast"
+    alias pg_start="postgres -D /usr/local/var/postgres"
 
   # shell
     alias s="source ~/.bash_profile"
