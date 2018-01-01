@@ -1,8 +1,19 @@
+ssh-add -K
+
+export PATH="/Users/rewinfrey/.stack/programs/x86_64-osx/ghc-8.0.1/bin/":$PATH
 export PATH=/usr/local/bin:/bin:$HOME/bin:/usr/local:/usr/local/mysql/bin:$PATH
 export PATH=$HOME/local/bin:/usr/local/bin:/usr/local/sbin:$HOME/Library/Haskell/opt/local/bin:/opt/local/sbin:/Users/rickwinfrey/.local/bin:$PATH
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="/usr/local/heroku/bin:$PATH"
+#export PATH="$HOME/Library/Haskell/bin:$PATH"
+export PATH=bin:$PATH
+export PATH=~/.local/bin:$PATH
+export PATH=node_modules/.bin:$PATH
+export PATH=/Users/rewinfrey/.local/bin/stack:$PATH
 export JAVA_HOME=$(/usr/libexec/java_home) # for maven...
+
+
+source ~/dotfiles/git_files/git-completion.bash
 
 eval "$(rbenv init -)"
 
@@ -23,6 +34,26 @@ BASE16_SHELL="$HOME/dotfiles/base16-shell/base16-default.dark.sh"
     alias dev="ENV=development lein with-profile development"
     alias spec="ENV=spec lein with-profile spec"
 
+  # haskell
+    alias rh="runhaskell -isrc -itest"
+    alias ht="stack test"
+    alias hmake="ghc --make -isrc -Wall -o"
+    alias build-all="stack build; stack build :semantic-diff-test; stack build semantic-difftool; stack build semantic-git-diff"
+
+  # tree-sitter
+    alias tsgr="tree-sitter generate && node-gyp build --release"
+    alias tsgd="tree-sitter generate && node-gyp build --debug"
+    alias tst="tree-sitter test"
+    alias tp="cd ~/github/tree-sitter-python; l"
+    alias ts="cd ~/github/tree-sitter-typescript; l"
+    alias th="cd ~/github/tree-sitter-haskell; l"
+    alias parse="tree-sitter parse example.ts"
+
+    function tsparse {
+      tree-sitter parse $1 -p
+    }
+    #alias tsparse="tree-sitter parse -p"
+
   # tmux
     alias tmux="TERM=screen-256color-bce tmux"
 
@@ -36,6 +67,7 @@ BASE16_SHELL="$HOME/dotfiles/base16-shell/base16-default.dark.sh"
     alias ...="cd ../.. ; l"
     alias ....="cd ../../.. ; l"
     alias code="cd ~/code ; l"
+    alias learning="cd ~/learning ; l"
     alias dotfiles="cd ~/dotfiles ; l"
     alias rick="cd ~/code/rick ; l"
     alias blog="cd ~/code/blog ; l"
@@ -48,6 +80,7 @@ BASE16_SHELL="$HOME/dotfiles/base16-shell/base16-default.dark.sh"
     alias dotcom="cd ~/github/github"
     alias meditation="cd ~/code/meditation; vim ~/code/meditation/log.txt"
     alias om="cd ~/code/rails/open-mentor; l"
+    alias sd="cd ~/github/semantic-diff; l"
 
   # rbenv
     alias local="rbenv local"
@@ -55,15 +88,21 @@ BASE16_SHELL="$HOME/dotfiles/base16-shell/base16-default.dark.sh"
     alias rubies="rbenv versions"
 
   # git
-    alias gs="  git status"
-    alias gd="  git diff --pretty=format:\"%Cgreen%h%Creset %Cblue%ad%Creset %s%C(yellow)%d%Creset %Cblue[%an]%Creset\" --graph --date=short --branches"
+    alias gs="  git status -s"
+    alias gd="  git diff --graph --date=short --branches"
+    alias gds=" git diff --staged"
     alias go="  colour-stderr-red git checkout"
     alias gb="  git branch -a"
     alias ga="  git add ."
-    alias gcm=" git commit -m"
+    alias gc="  git commit -m"
     alias gp="  git push"
     alias gh="  git hist"
     alias gl="  git log --pretty=format:\"%Cgreen%h%Creset %Cblue%ad%Creset %s%C(yellow)%d%Creset %Cblue[%an]%Creset\" --graph --date=short --branches"
+    alias gcm="  git checkout master"
+    alias gpoh=" git push origin head"
+    alias gpom=" git push origin master"
+    alias gsu=" git submodule update --init --recursive"
+
 
   # Hireology
     alias fetch_db="code; cd shell; ./pull_db_from_qa.sh; ./restore_db.sh"
@@ -124,8 +163,9 @@ BASE16_SHELL="$HOME/dotfiles/base16-shell/base16-default.dark.sh"
     alias s="source ~/.bash_profile"
 
   # ctags
+    alias ctags_haskell="ctags -R --languages=haskell --exclude=.git --exclude=log --exclude=.stack-work --exclude=docs --exclude=weekly . "
     alias ctags_clojure="ctags -R --languages=clojure --exclude=.git --exclude=log . "
-    #alias ctags_ruby="ctags -R --languages=ruby --exclude=.git --exclude=log . \$\(bundle list --paths\)"
+    alias ctags_ruby="ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)"
     function ctags_ruby {
       ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)
     }
@@ -176,12 +216,18 @@ BASE16_SHELL="$HOME/dotfiles/base16-shell/base16-default.dark.sh"
   PS1="\[\033[9;36;40m\] \w \[\033[0m\] \[\033[9;36;40m\]\$(parse_git_branch)\[\033[0m\]\n🐰  "
 
 # added by Anaconda 2.3.0 installer
-export PATH="/Users/bashrw/anaconda/bin:$PATH"
+#export PATH="/Users/bashrw/anaconda/bin:$PATH"
 
 # Setting PATH for Python 3.5
 # The orginal version is saved in .bash_profile.pysave
-PATH="/Library/Frameworks/Python.framework/Versions/3.5/bin:${PATH}"
-export PATH
+#PATH="/Library/Frameworks/Python.framework/Versions/3.5/bin:${PATH}"
+#export PATH
 
 # added by Anaconda3 2.4.0 installer
-export PATH="//anaconda/bin:$PATH"
+#export PATH="//anaconda/bin:$PATH"
+
+# added by Anaconda3 4.2.0 installer
+export PATH="$PATH:/Users/rewinfrey/anaconda3/bin"
+
+export GPG_TTY=$(tty)
+export PATH="/usr/local/opt/node@6/bin:$PATH"
