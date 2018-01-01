@@ -1,27 +1,30 @@
-set nocompatible
-call pathogen#infect()
-call pathogen#helptags()
-
-filetype off                    " force reloading *after* pathogen loaded
-filetype plugin indent on       " enable detection, plugins and indenting in one step
 syntax on
-syntax enable
+filetype plugin indent on       " enable detection, plugins and indenting in one step
+
+execute pathogen#infect()
+
+set nocompatible
 set rtp+=/usr/local/go/misc/vim
 set runtimepath^=~/.vim/bundle/ctrlp.vim
-
-" disable Ex mode
-nnoremap Q <nop>
+let $PATH = $PATH . ":" . expand('~/.local/bin/ghc-mod')
 
 " edits behavior
 set showmode                       " always show the current Vim mode
+set tw=80
 set hidden                         " hides buffers rather than closing them
-set wildignore=*.swp,*.bak,*.pyc,*.class " ignores these file types
+set wildignore=*.swp,*.bak,*.pyc,*.class,*\\tmp\\*,*.swo,*.zip,.git,.cabal-sandbox " ignores these file types
+set wildmode=longest,list,full
+set wildmenu
+set cmdheight=1
 
 " tabs & indentation
+set softtabstop=2
 set tabstop=2                      " tabs are 2 spaces
-set expandtab                      " use spaces, not tabs (optional)
-set smarttab                       " insert tabs on the start of a line according to shiftwidth, not tabstop
 set shiftwidth=2                   " number of spaces used by autoindenting
+set expandtab                      " use spaces, not tabs (optional)
+set smartcase
+set smarttab                       " insert tabs on the start of a line according to shiftwidth, not tabstop
+set smartindent
 set autoindent                     " default autoindent to on
 set copyindent                     " copy previous indentation on autoindenting
 set shiftround                     " use multiple of shiftwidth when indenting with '<' and '>'
@@ -43,8 +46,11 @@ let base16colorspace=256
 let g:solarized_visibility = "high"
 let g:airline_powerline_fonts=1
 let g:airline_theme="dark"
-"colorscheme atom
 colorscheme base16-default
+
+" Python Neovim Support
+let g:python_host_prog  = '/usr/local/bin/python2'
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 " Airline
 let g:airline_theme               = 'base16'
@@ -55,6 +61,7 @@ let g:airline_detect_paste        = 1
 let g:airline_detect_iminsert     = 1
 let g:airline_powerline_fonts     = 1
 let g:airline#extensions#ctrlp#color_template = 'replace'
+
 let g:airline#extensions#ctrlp#show_adjacent_modes = 1
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#whitespace#symbol = '!'
@@ -87,6 +94,7 @@ set ignorecase                     " ignore case when searching
 set smartcase                      " ignore case if search pattern is all lowercase, case-sensitive otherwise
 set gdefault                       " search / replace 'globally' (on a line) by default
 set showmatch                      " set show matching parenthesis
+" hi Search ctermbg=Gray ctermfg=White
 
 " line wrapping
 set nowrap
@@ -129,7 +137,7 @@ nnoremap / /\v
 vnoremap / /\v
 
 " ,<space> turns off search highlighting
-nnoremap <LocalLeader><space> :noh<CR>
+nnoremap <LocalLeader><space> :noh<CR> :GhcModTypeClear<cr>
 
 " navigate braces with <tab> rather than %
 nnoremap <tab> %
@@ -144,6 +152,9 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
+" search for selection in visual mode
+vnoremap // y/<C-R>"<CR>
+
 " CtrlP
 nmap <silent> <LocalLeader>p :CtrlP<CR>
 let g:ctrlp_switch_buffer = 'Et'
@@ -155,7 +166,7 @@ let g:ctrlp_max_files=0
 let g:ctrlp_max_depth=30
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:30,results:30'
 let g:ctrlp_custom_ignore = {
-  \ 'dir': '\v[\/](node_modules|tags|vendor|public|tmp|git-bin|enterprise|bin)',
+  \ 'dir': '\v[\/](node_modules|tags|vendor|public|tmp|git-bin|enterprise|bin|dist)',
   \ 'file': '\vtags',
   \ }
 let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
@@ -279,8 +290,8 @@ function! RunTests(filename)
     if match(a:filename, '\.feature$') != -1
         exec ":!script/features " . a:filename
     else
-        if filereadable("script/testrb")
-            exec ":!script/testrb " . a:filename
+        if filereadable("bin/testrb_or_zt")
+            exec ":!bin/testrb_or_zt " . a:filename
         elseif filereadable("Gemfile")
             exec ":!bundle exec rspec --color -f d " . a:filename
         else
@@ -298,3 +309,47 @@ augroup myvimrc
   au!
   au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
 augroup END
+
+" Syntastic
+map <LocalLeader>s :SyntasticToggleMode<CR>
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+
+" Haskell
+
+" Haskell ghc-mod
+
+" map <silent> ta :GhcModTypeInsert<CR>
+" map <silent> ts :GhcModSplitFunCase<CR>
+" map <silent> tm :GhcModType<CR>
+" map <silent> ti :GhcModInfo<CR>
+" map <silent> te :GhcModTypeClear<CR>
+
+" Haskell omnicompletion
+
+let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
+let g:haskellmode_completion_ghc = 1
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+
+" Tabularize
+
+let g:haskell_tabular = 1
+
+vmap a= :Tabularize /=<CR>
+vmap a; :Tabularize /::<CR>
+vmap a- :Tabularize /-><CR>
+vmap a( :Tabularize /(<CR>
+
+let g:haskell_enable_quantification   = 1
+let g:haskell_enable_recursivedo      = 1
+let g:haskell_enable_arrowsyntax      = 1
+let g:haskell_enable_pattern_synonyms = 1
+let g:haskell_enable_typeroles        = 1
+let g:haskell_enable_static_pointers  = 1
