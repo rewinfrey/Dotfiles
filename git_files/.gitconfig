@@ -1,6 +1,6 @@
 [user]
-  name = Rick Winfrey
-  email = rewinfrey@github.com
+	name = Rick Winfrey
+	email = rewinfrey@github.com
 
 [core]
   editor = /usr/local/bin/vim
@@ -25,7 +25,10 @@
   praise = blame
   count = git shortlog -sn
 	unstage = reset HEAD --
-	last = log -1 HEAD
+  last = log -1 HEAD
+  gap = git add -p
+  gds = git diff --staged
+  gd  = git diff
 
 [push]
   default = upstream
@@ -37,6 +40,13 @@
 [credential]
 	helper = osxkeychain
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
+	smudge = git-lfs smudge -- %f
 	required = true
+	clean = git-lfs clean -- %f
+	process = git-lfs filter-process
+[github]
+	user = rewinfrey
+[commit]
+#	gpgsign = true
+[url "git://github.com/ghc/packages-"]
+	insteadOf = git://github.com/ghc/packages/

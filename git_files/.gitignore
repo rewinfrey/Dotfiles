@@ -1,1 +1,11 @@
 DS_Store
+.stack-work
+dist
+*.hi
+*.o
+.ghci
+.pry_history
+result.txt
+expired.txt
+test-runner.sh
+symbols.txt
