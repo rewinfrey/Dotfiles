@@ -180,3 +180,5 @@ export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 PATH="${PATH}:/Library/Frameworks/JRuby.framework/Versions/Current/bin"
 export PATH
 source /Users/bashrw/.rvm/scripts/rvm
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
