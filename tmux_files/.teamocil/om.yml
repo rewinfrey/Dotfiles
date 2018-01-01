@@ -1,0 +1,31 @@
+name: "open-mentor"
+windows:
+  - name: "server"
+    layout: even-vertical
+    panes:
+      - commands:
+        - om
+        - clear
+        - be rails server
+  - name: "console"
+    layout: even-vertical
+    panes:
+      - commands:
+        - om
+        - clear
+        - be rails console
+  - name: "vim"
+    layout: even-vertical
+    panes:
+      - commands:
+        - om
+        - clear
+        - vim
+  - name: "spec"
+    layout: even-vertical
+    panes:
+      - commands:
+        - om
+        - clear
+        - be rake db:migrate db:test:prepare
+        - be rspec spec

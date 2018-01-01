@@ -1,0 +1,20 @@
+name: "project"
+windows:
+  - name: zeus
+    root: /Users/rewinfrey/project
+    layout: even-vertical
+    panes:
+      - commands:
+        - bin/zeus start
+  - name: console
+    root: /Users/rewinfrey/project
+    layout: even-vertical
+    panes:
+      - commands:
+        - bin/console
+  - name: vim
+    root: /Users/rewinfrey/project
+    layout: even-vertical
+    panes:
+      - commands:
+        - vim
