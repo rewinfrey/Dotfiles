@@ -7,6 +7,7 @@ brew "cabal-install"
 brew "curl"
 brew "delve" # go debugger
 brew "dfu-util"
+brew "fish"
 brew "git"
 brew "git-duet"
 brew "graphviz" # for dot & tree-sitter grammar development
