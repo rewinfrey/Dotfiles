@@ -1,5 +1,3 @@
-ssh-add -K
-
 export PATH="/Users/rewinfrey/.stack/programs/x86_64-osx/ghc-8.0.1/bin/":$PATH
 export PATH=/usr/local/bin:/bin:$HOME/bin:/usr/local:/usr/local/mysql/bin:$PATH
 export PATH=$HOME/local/bin:/usr/local/bin:/usr/local/sbin:$HOME/Library/Haskell/opt/local/bin:/opt/local/sbin:/Users/rickwinfrey/.local/bin:$PATH
@@ -10,20 +8,21 @@ export PATH=bin:$PATH
 export PATH=~/.local/bin:$PATH
 export PATH=node_modules/.bin:$PATH
 export PATH=/Users/rewinfrey/.local/bin/stack:$PATH
-export JAVA_HOME=$(/usr/libexec/java_home) # for maven...
 
-
-source ~/dotfiles/git_files/git-completion.bash
-
-eval "$(rbenv init -)"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Brew completion
-#if [ -f ~/.brew_completion.sh ]; then
-#  . ~/.brew_completion.sh
-#fi
+if [ -f ~/.brew_completion.sh ]; then
+  . ~/.brew_completion.sh
+fi
 
-BASE16_SHELL="$HOME/dotfiles/base16-shell/base16-default.dark.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+# Git completion
+source $HOME/.dotfiles/git_files/git-completion.bash
+
+# BASE16_SHELL="$HOME/.dotfiles/base16-shell/base16-default.dark.sh"
+# [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 #ALIASES
   # vim
@@ -39,20 +38,18 @@ BASE16_SHELL="$HOME/dotfiles/base16-shell/base16-default.dark.sh"
     alias ht="stack test"
     alias hmake="ghc --make -isrc -Wall -o"
     alias build-all="stack build; stack build :semantic-diff-test; stack build semantic-difftool; stack build semantic-git-diff"
+    alias hd='ghcid "--command=stack ghci semantic-diff"'
 
   # tree-sitter
     alias tsgr="tree-sitter generate && node-gyp build --release"
     alias tsgd="tree-sitter generate && node-gyp build --debug"
-    alias tst="tree-sitter test"
-    alias tp="cd ~/github/tree-sitter-python; l"
-    alias ts="cd ~/github/tree-sitter-typescript; l"
-    alias th="cd ~/github/tree-sitter-haskell; l"
-    alias parse="tree-sitter parse example.ts"
+    alias tst="npm test"
+    alias ts="cd ~/tree-sitter; l"
+    alias tsp=tsparse
 
     function tsparse {
       tree-sitter parse $1 -p
     }
-    #alias tsparse="tree-sitter parse -p"
 
   # tmux
     alias tmux="TERM=screen-256color-bce tmux"
@@ -165,10 +162,10 @@ BASE16_SHELL="$HOME/dotfiles/base16-shell/base16-default.dark.sh"
   # ctags
     alias ctags_haskell="ctags -R --languages=haskell --exclude=.git --exclude=log --exclude=.stack-work --exclude=docs --exclude=weekly . "
     alias ctags_clojure="ctags -R --languages=clojure --exclude=.git --exclude=log . "
-    alias ctags_ruby="ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)"
-    function ctags_ruby {
-      ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)
-    }
+    #alias ctags_ruby="ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)"
+    #function ctags_ruby {
+    #  ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)
+    #}
 
   # utilities
     alias au="ruby ~/code/ruby/utilities/lib/ack_unique.rb"
@@ -215,19 +212,5 @@ BASE16_SHELL="$HOME/dotfiles/base16-shell/base16-default.dark.sh"
   # gray-scalar prompt
   PS1="\[\033[9;36;40m\] \w \[\033[0m\] \[\033[9;36;40m\]\$(parse_git_branch)\[\033[0m\]\n🐰  "
 
-# added by Anaconda 2.3.0 installer
-#export PATH="/Users/bashrw/anaconda/bin:$PATH"
-
-# Setting PATH for Python 3.5
-# The orginal version is saved in .bash_profile.pysave
-#PATH="/Library/Frameworks/Python.framework/Versions/3.5/bin:${PATH}"
-#export PATH
-
-# added by Anaconda3 2.4.0 installer
-#export PATH="//anaconda/bin:$PATH"
-
-# added by Anaconda3 4.2.0 installer
-export PATH="$PATH:/Users/rewinfrey/anaconda3/bin"
-
 export GPG_TTY=$(tty)
-export PATH="/usr/local/opt/node@6/bin:$PATH"
+
