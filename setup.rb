@@ -2,12 +2,12 @@
 
 # Setup symlinks
 `
-ln -s dotfiles/bash_files/.bash_profile .bash_profile;
-ln -s dotfiles/vim_files                .vim;
-ln -s dotfiles/vim_files/.vimrc         .vimrc;
-ln -s dotfiles/tmux_files/.tmux.conf    .tmux.conf;
-ln -s dotfiles/git_files/.gitconfig     .gitconfig;
-ln -s dotfiles/git_files/.gitignore     .gitignore
+ln -s ~/.dotfiles/bash_files/.bash_profile ~/.bash_profile;
+ln -s ~/.dotfiles/vim_files                ~/.vim;
+ln -s ~/.dotfiles/vim_files/.vimrc         ~/.vimrc;
+ln -s ~/.dotfiles/tmux_files/.tmux.conf    ~/.tmux.conf;
+ln -s ~/.dotfiles/git_files/.gitconfig     ~/.gitconfig;
+ln -s ~/.dotfiles/git_files/.gitignore     ~/.gitignore
 `
 
 # Brewfile
@@ -26,3 +26,6 @@ ln -s dotfiles/git_files/.gitignore     .gitignore
 
 # Hide desktop icons
 `defaults write com.apple.finder CreateDesktop false; killall Finder`
+
+# Prevent new window animations
+`defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false`
