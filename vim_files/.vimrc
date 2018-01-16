@@ -41,12 +41,8 @@ set ruler
 
 " colorscheme
 set t_Co=256
-set background=dark
-let base16colorspace=256
-let g:solarized_visibility = "high"
 let g:airline_powerline_fonts=1
-let g:airline_theme="dark"
-colorscheme base16-default
+colorscheme base16-one-light
 
 " Python Neovim Support
 let g:python_host_prog  = '/usr/local/bin/python2'
